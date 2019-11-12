@@ -51,11 +51,10 @@ class ReviewSeedingService
     rand(20..90).times do
       FoursquareReview.create(reviewer_image: Faker::Avatar.image,
                               reviewer_username: Faker::Name.name,
-                              reviewer_profile_url: "https://sp0tlight.herokuapp.com",
                               review_text: "#{Faker::Quote.matz} #{Faker::Lorem.sentence(word_count: rand(10..19))}",
-                              rating: rand(1.0..5.0),
                               review_time: rand(1_420_070_400..1_573_506_000),
-                              restaurant_id: restaurant.id)
+                              restaurant_id: restaurant.id,
+                              meal_image: Faker::LoremFlickr.image(size: "500x600", search_terms: ['food']))
     end
     puts "\e[92Squarespace Seeded\e[0m\n"
   end

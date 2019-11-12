@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
   end
 
   def feed
-    @review = RestaurantReview.first
+    #@review = RestaurantReview.first #WHY?!
     @restaurant = Restaurant.find_by(user_id: current_user)
     @review_types = @restaurant.restaurant_reviews.pluck(:review_type).uniq
     @all_reviews = @restaurant.restaurant_reviews
