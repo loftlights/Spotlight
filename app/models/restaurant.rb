@@ -8,6 +8,7 @@ class Restaurant < ApplicationRecord
   belongs_to :user
   has_many :restaurant_reviews
   has_many :google_reviews, through: :restaurant_reviews, source: :review, source_type: 'GoogleReview'
+  has_many :zomato_reviews, through: :restaurant_reviews, source: :review, source_type: 'ZomatoReview'
   has_many :yelp_reviews, through: :restaurant_reviews, source: :review, source_type: 'YelpReview'
   has_many :four_square_reviews, through: :restaurant_reviews, source: :review, source_type: 'FoursquareReview'
 
@@ -24,4 +25,12 @@ class Restaurant < ApplicationRecord
   serialize :zomato_average_rating
   serialize :tripadvisor_review_count
   serialize :tripadvisor_average_rating
+
+  def average_google_rating
+    all_ratings = []
+    self.google_reviews.each do |review|
+      all_ratings << review.rating
+    end
+    all_ratings.sum / all_ratings.length unless all_ratings == []
+  end
 end
