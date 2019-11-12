@@ -14,7 +14,7 @@
           <% end %>
         </div>
         <p class = "my-auto timebox mx-2"><%= review.review.review_time.strftime('%d-%m-%Y %H:%M') %></p>
-        <% if DateTime.strptime(review.review.review_time.to_s, '%s') > current_user.last_sign_in_at %>
+        <% if review.review.review_time > current_user.last_sign_in_at %>
           <p class = "my-auto" style="color: #E34444">NEW</p>
         <% end %>
       </div>
